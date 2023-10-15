@@ -29,18 +29,37 @@ namespace CQRS_and_MediatR_Testing.Repositories
                 context.Students.Add(entity);
                 await context.SaveChangesAsync();
             }
+            else
+            {
+                throw new Exception("Student with the same ID already exists");
+            }
         }
 
         public async Task UpdateStudentAsync(StudentDetails entity)
         {
-            context.Students.Update(entity);
-            await context.SaveChangesAsync();
+            if (await context.Students.AnyAsync(x => x.Id == entity.Id))
+            {
+                context.Students.Update(entity);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Incorrect student ID");
+            }
         }
 
         public async Task DeleteStudentAsync(Guid id)
         {
-            context.Students.Remove(new StudentDetails { Id = id });
-            await context.SaveChangesAsync();
+            if (await context.Students.AnyAsync(x=> x.Id == id))
+            {
+                context.Students.Remove(new StudentDetails { Id = id });
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Incorrect student ID");
+            }
+            
         }
     }
 }
