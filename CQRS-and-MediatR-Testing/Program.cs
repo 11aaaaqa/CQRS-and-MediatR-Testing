@@ -1,4 +1,7 @@
+using System.Reflection;
 using CQRS_and_MediatR_Testing.Data;
+using CQRS_and_MediatR_Testing.Models;
+using CQRS_and_MediatR_Testing.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IRepository<StudentDetails>, StudentRepository>();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=CQRS-and-MediatR-Testing;Integrated Security=true"));
 
 var app = builder.Build();
