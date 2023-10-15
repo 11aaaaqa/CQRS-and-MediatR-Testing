@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CQRS_and_MediatR_Testing.Commands
 {
-    public class CreateStudentCommand : IRequest<StudentDetails>
+    public class CreateStudentCommand : IRequest
     {
         public string StudentName { get; set; }
         public string StudentEmail { get; set; }
