@@ -15,7 +15,7 @@ namespace CQRS_and_MediatR_Testing.Repositories
 
         public async Task<List<StudentDetails>> GetAllAsync() => await context.Students.ToListAsync();
 
-        public async Task<StudentDetails> GetByIdAsync(Guid id)
+        public async Task<StudentDetails?> GetByIdAsync(Guid id)
         {
             var student = await context.Students.SingleOrDefaultAsync(x => x.Id == id);
             if (student == null) throw new ArgumentException("Incorrect student ID");
