@@ -15,11 +15,7 @@ namespace CQRS_and_MediatR_Testing.Handlers
         }
         public async Task Handle(DeleteStudentCommand command, CancellationToken cancellationToken)
         {
-            var student = await repository.GetByIdAsync(command.Id);
-            if (student != null)
-            {
-                await repository.DeleteStudentAsync(student.Id);
-            }
+            await repository.DeleteStudentAsync(command.Id);
         }
     }
 }

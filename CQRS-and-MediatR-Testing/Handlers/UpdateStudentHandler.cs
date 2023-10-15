@@ -15,19 +15,16 @@ namespace CQRS_and_MediatR_Testing.Handlers
         }
         public async Task Handle(UpdateStudentCommand command, CancellationToken token)
         {
-            var student = await repository.GetByIdAsync(command.Id);
-            if (student != null)
-            {
-                var updatedStudent = new StudentDetails
-                {
-                    StudentName = command.StudentName,
-                    StudentEmail = command.StudentEmail,
-                    StudentAddress = command.StudentAddress,
-                    StudentAge = command.StudentAge
-                };
+            var updatedStudent = new StudentDetails
+            { 
+                Id = command.Id,
+                StudentName = command.StudentName, 
+                StudentEmail = command.StudentEmail,
+                StudentAddress = command.StudentAddress,
+                StudentAge = command.StudentAge
+            };
 
-                await repository.UpdateStudentAsync(updatedStudent);
-            }
+            await repository.UpdateStudentAsync(updatedStudent);
         }
     }
 }
