@@ -1,6 +1,4 @@
-﻿using CQRS_and_MediatR_Testing.Models;
-
-namespace CQRS_and_MediatR_Testing.Repositories
+﻿namespace CQRS_and_MediatR_Testing.Repositories
 {
     public interface IRepository<T>
     {
