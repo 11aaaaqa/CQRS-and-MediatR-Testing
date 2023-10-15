@@ -13,7 +13,19 @@ namespace CQRS_and_MediatR_Testing.Handlers
         {
             this.repository = repository;
         }
-        public async Task<StudentDetails> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken) => await repository.GetByIdAsync(request.Id);
+
+        public async Task<StudentDetails> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await repository.GetByIdAsync(request.Id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        } 
         
     }
 }
