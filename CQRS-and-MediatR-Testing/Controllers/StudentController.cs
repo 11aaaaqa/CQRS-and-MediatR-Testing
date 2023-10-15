@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CQRS_and_MediatR_Testing.Controllers
 {
-    public class StudentController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StudentController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }
